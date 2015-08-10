@@ -33,7 +33,7 @@ function FileStore() {
 
   cacheFiles.forEach(function(file) {
 
-    file = file.replace('.json', '').replace('_', ':');
+    file = file.replace('.json', '').replace('_', ':').replace('_', ':');
 
     self.cache[file] = true;
 
@@ -55,7 +55,7 @@ FileStore.prototype.get = function get(key, fn) {
 
   var val, data;
 
-  var fileKey = key.replace(':', '_');
+  var fileKey = key.replace(':', '_').replace(':', '_');
   var cacheFile = path.join(cwd, 'tmp', fileKey + '.json');
 
   // if (this.cache[key] < Date.now()) {
@@ -152,7 +152,7 @@ FileStore.prototype.set = function set(key, val, ttl, fn) {
 
   }
 
-  var fileKey = key.replace(':', '_');
+  var fileKey = key.replace(':', '_').replace(':', '_');
   var cacheFile = path.join(cwd, 'tmp', fileKey + '.json');
 
   fs.writeFileSync(cacheFile, JSON.stringify(data, null, 4));
@@ -181,7 +181,7 @@ FileStore.prototype.del = function del(key, fn) {
 
   fn = fn || noop;
 
-  var fileKey = key.replace(':', '_');
+  var fileKey = key.replace(':', '_').replace(':', '_');
   var cacheFile = path.join(cwd, 'tmp', fileKey + '.json');
 
   if (!fs.existsSync(cacheFile)) {
